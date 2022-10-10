@@ -7,51 +7,97 @@ app.get("/products", (req, res) => {
   const data = fs.readFileSync("./products.json", { encoding: "utf-8" });
   const parseData = JSON.parse(data);
   res.send(parseData.products);
+  console.log("Thanks for get");
 });
 
 app.post("/products", (req, res) => {
   const data = fs.readFileSync("./products.json", { encoding: "utf-8" });
   const parseData = JSON.parse(data);
+
   parseData.products.push(req.body);
+
   fs.writeFileSync("./products.json", JSON.stringify(parseData), {
     encoding: "utf-8",
   });
-  res.send("posting sucessfull");
+
+  res.send("Thanks for posting");
 });
 
 app.delete("/products/:id", (req, res) => {
   const { id } = req.params;
-  const data = fs.readFileSync(`./products.json`, { encoding: "utf-8" });
+  const data = fs.readFileSync("./products.json", { encoding: "utf-8" });
   const parseData = JSON.parse(data);
   let arr = [];
+
   parseData.products.forEach((item) => {
     if (item.id != id) {
       arr.push(item);
     }
   });
-  //   console.log(arr);
   parseData.products = arr;
+  fs.writeFileSync("./products.json", JSON.stringify(parseData), {
+    encoding: "utf-8",
+  });
+
+  res.send("Thanks for deleting");
+});
+
+app.patch("/products/:id", (req, res) => {
+  const { id } = req.params;
+  const payload = req.body;
+  const data = fs.readFileSync("./products.json", { encoding: "utf-8" });
+  const parseData = JSON.parse(data);
+
+  const products = parseData.products;
+
+  const updateData = products.map((item) => {
+    return item.id == id ? { ...payload, id: item.id } : item;
+  });
+
+  parseData.products = updateData;
 
   fs.writeFileSync("./products.json", JSON.stringify(parseData), {
     encoding: "utf-8",
   });
-  res.send("deleting sucessfull");
+
+  res.send("Thanks for updating");
 });
 
 app.put("/products/:id", (req, res) => {
   const { id } = req.params;
-  const data = fs.readFileSync(`./products.json`, { encoding: "utf-8" });
+  const payload = req.body;
+  const data = fs.readFileSync("./products.json", { encoding: "utf-8" });
   const parseData = JSON.parse(data);
-  const newData = req.body;
-  parseData.products.map((item) => {
-    item.id === id ? { ...item, newData } : item;
+  const products = parseData.products;
+
+  const updateData = products.map((item) => {
+    return item.id == id ? { ...payload, price: item.price } : item;
   });
+
+  parseData.products = updateData;
+
   fs.writeFileSync("./products.json", JSON.stringify(parseData), {
     encoding: "utf-8",
   });
 
-  res.send("put request sucessfull");
+  res.send("Thanks for puting");
 });
+
+
+// app.put("/products/:id", (req, res) => {
+//   const { id } = req.params;
+//   const data = fs.readFileSync(`./products.json`, { encoding: "utf-8" });
+//   const parseData = JSON.parse(data);
+//   const newData = req.body;
+//   parseData.products.map((item) => {
+//     item.id === id ? { ...item, newData } : item;
+//   });
+//   fs.writeFileSync("./products.json", JSON.stringify(parseData), {
+//     encoding: "utf-8",
+//   });
+
+//   res.send("put request sucessfull");
+// });
 
 app.listen(8080, () => {
   console.log("Listen in port 8080 successful");
