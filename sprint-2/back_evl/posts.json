@@ -1,0 +1,34 @@
+{
+    "posts": [
+        {
+            "postId": 1,
+            "title": "nem-111",
+            "content": "mongodb",
+            "author": "nihal"
+        },
+        {
+            "postId": 3,
+            "title": "react",
+            "content": "chakra",
+            "author": "satyam"
+        },
+        {
+            "postId": 2,
+            "title": "redux",
+            "content": "auth",
+            "author": "owais"
+        },
+        {
+            "postId": 4,
+            "title": "nem-eddf",
+            "content": "kjdd",
+            "author": "jdfje"
+        },
+        {
+            "postId": 5,
+            "title": "jhrej",
+            "content": "mcxn",
+            "author": "antra"
+        }
+    ]
+}
