@@ -1,0 +1,16 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "1. Down the zip of the repository in masai-repo. 2. Unzip and rename the folder as per masai-repo-standards. 3. All set to start.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "kailash",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "vercel": "^27.3.3"
+  }
+}
